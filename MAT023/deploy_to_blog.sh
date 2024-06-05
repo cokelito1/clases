@@ -1,6 +1,8 @@
 #!/bin/bash
 
-BLOG_DIRECTORY=~/Documents/blog
+if [ -z ${BLOG_DIRECTORY} ]; then
+	BLOG_DIRECTORY=~/Documents/blog
+fi
 
 for dir in */; do
 	cd "$dir"
