@@ -1,0 +1,223 @@
+\documentclass[a4paper,oneside,10.5pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[spanish]{babel}
+%\usepackage[french]{babel}
+\usepackage[autolanguage]{numprint}
+\usepackage{hyperref}
+\usepackage{verbatim}
+\usepackage{fancyhdr}
+\usepackage{url}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{fullpage}
+\usepackage{mathrsfs}
+\usepackage{calrsfs}  %letras caligráficas
+\usepackage{enumerate}
+\usepackage{geometry}
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+\geometry{vmargin=2cm, hmargin=1.8cm}
+\usepackage{arydshln} %hacer lineas punteadas
+\usepackage{color} %colores
+\usepackage[all,cmtip]{xy} %% diagramas conmutativos
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\newcommand{\blue}[1]{{\color[rgb]{0,0,1} {#1}}}
+
+\bibliographystyle{alpha}
+
+\pagestyle{empty}
+
+\newcommand*{\transp}[2][-3mu]{\ensuremath{\mskip1mu\prescript{\smash{\mathrm t\mkern#1}}{}{\mathstrut#2}}} %% la transpuesta a la izquierda es mejor :-P
+
+\newcommand*{\TakeFourierOrnament}[1]{{%
+\fontencoding{U}\fontfamily{futs}\selectfont\char#1}}
+\newcommand*{\danger}{\TakeFourierOrnament{66}} %%% atencion!
+
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\hom}{\operatorname{Hom}}
+\newcommand\FF{\mathbb{F}}
+\newcommand\PP{\mathbb{P}}
+\newcommand\RR{\mathbb{R}}
+\newcommand\CC{\mathbb{C}}
+\newcommand\ZZ{\mathbb{Z}}
+\newcommand\QQ{\mathbb{Q}}
+\newcommand\NN{\mathbb{N}}
+\newcommand\A{\mathcal{A}}
+\newcommand\h{\operatorname{H}}
+\newcommand\Id{\operatorname{Id}}
+\newcommand\mult{\operatorname{mult}}
+\newcommand\GL{\operatorname{GL}}
+\newcommand\Vect{\operatorname{Vect}}
+\newcommand\PC{\operatorname{PC}}
+\newcommand\dd{\mathrm{d}}
+\newcommand\Cinf{\mathcal{C}^\infty}
+\newcommand\isomorphisme{\stackrel{\simeq}{\longrightarrow}}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\theoremstyle{definition}
+\newtheorem{defi}{Definición}[section]
+\theoremstyle{plain}
+\newtheorem{prop}[defi]{Proposición}
+\newtheorem{lemm}[defi]{Lema}
+\newtheorem{teo}[defi]{Teorema}
+\newtheorem*{teo*}{Teorema}
+\newtheorem{coro}[defi]{Corolario}
+\theoremstyle{remark}
+\newtheorem{ejem}[defi]{Ejemplo}
+\newtheorem{obs}[defi]{Observación}
+\theoremstyle{theorem}
+\newtheorem{prob}{Problema}
+\newtheorem{sol}{Solución}
+
+
+\DeclareMathOperator\id{Id}
+\DeclareMathOperator\IIm{Im}
+\DeclareMathOperator\RRe{Re}
+\DeclareMathOperator\vol{vol}
+\DeclareMathOperator\Ker{Ker}
+\DeclareMathOperator\End{End}
+\DeclareMathOperator\Hom{Hom}
+\DeclareMathOperator\pr{pr}
+\DeclareMathOperator\Aut{Aut}
+\renewcommand\Im{\IIm}
+\renewcommand\Re{\RRe}
+
+\hypersetup{
+pdfauthor = {Jorge Bravo},
+pdfsubject = {MAT023 2024},
+pdftitle = {Teorema de la Funcion Inversa},
+pdfkeywords = {},
+}
+
+\setlength\parindent{0px}
+\begin{document}
+
+
+\begin{center}
+{\Large \textsc{Teorema de la Función Inversa}}\\
+\vspace{1em}
+\textsc{Ayudante: Jorge Bravo}\\
+\end{center}
+
+\section*{Motivación}
+El teorema de la función inversa es un poco técnico para dar aplicaciones, la mayoría de estas aplicaciones son parte de un área de la matemática llamada ``Geometría Diferencial''. La aplicación típica que se da de este teorema nos dice que dado un sistema de $n$ ecuaciones y $n$ variables, este tendrá una solución única en una vecindad de un punto si la derivada es invertible. Ahora veremos que significa todo esto.
+
+\section*{Teorema y Consecuencias}
+\begin{teo}[Función Inversa]
+Sea $f : \RR^n \to \RR^n$ una función de clase $\mathcal{C}^1$. Además suponga que en un punto $x := (x_1, \dots, x_n) \in \RR^n$ se tiene que $Df(x)$ es invertible (es decir el determinante de $Df(x)$ es no nulo), entonces existe una vecindad $\mathcal{U} \subset \RR^n$ de $x$ y una vecindad $\mathcal{V} \subset \RR^n$ de $f(x)$ de tal forma que $f : \mathcal{U} \to \mathcal{V}$ es biyectiva (Es decir tiene inversa). Además se tiene que $Df^{-1}(f(x)) = {(Df(x))}^{-1}$.
+\end{teo}
+
+\begin{obs}
+    A veces la ultima condición se escribe de la siguiente manera, si $y = f(x)$, entonces $Df^{-1}(y) = {(Df(x))}^{-1}$
+\end{obs}
+
+Si uno no esta acostumbrado a leer los teoremas esto puede parecer mucho, pero en verdad no es muy complicado de usar, solamente hay que descifrar lo que dice. Ahora veremos la consecuencia principal de este teorema y como se aplica normalmente en los certámenes.
+
+\begin{coro}
+    Suponga que tiene el siguiente sistema de ecuaciones con $n$ variables y $n$ ecuaciones, donde $f: \RR^n \to \RR^n$ de clase $\mathcal{C}^1$
+    \begin{equation*}
+        f(x) = y
+    \end{equation*}
+
+    Donde $x, y \in \RR^n$. Si $a \in \RR^n$ es un punto tal que $f(a) = y$ y además $\det(Df(a)) \neq 0$, entonces esta solución es única en una vecindad de $a$.
+\end{coro}
+
+\section*{Intuición}
+La idea es simple, tenemos que recordar que la derivada esta \textbf{muy} conectada con aproximar una función de manera local, por lo tanto lo que nos dice el teorema de la función inversa es que funciones que podemos aproximar localmente por funciones lineales invertibles, son localmente invertibles.
+
+\section*{Ejemplos y Problemas}
+\begin{prob}
+Considere la siguiente función
+\begin{align*}
+    f : \RR^2 &\to \RR^2\\
+    (x, y) &\mapsto (x^2 + x^2y + 10y, x + y^3)
+\end{align*}
+
+Muestre que tiene inversa cercana al punto $(1,1)$ y calcula la derivada de esta en el punto $(12, 2)$.
+\end{prob}
+\begin{sol}
+    Este es un ejercicio típico del teorema de la función inversa que no tiene muchos problemas, es una aplicación directa.
+
+    Notemos primero que $f$ es una función de clase $\mathcal{C}^\infty$, por lo tanto se puede aplicar el teorema de la función inversa. Calculemos la derivada de $f$ en el punto $(1, 1)$.
+    \begin{align*}
+        {Df(1, 1)}_{2 \times 2} = \begin{bmatrix}
+            \partial_x f_1(1, 1) & \partial_y f_1(1, 1)\\
+            \partial_x f_2(1, 1) & \partial_y f_2(1, 1)
+        \end{bmatrix} = \begin{bmatrix}
+            2x + 2xy & x^2 + 10\\ 1 & 3y^2
+        \end{bmatrix}_{(x, y) = (1, 1)} = \begin{bmatrix}
+            4 & 11\\
+            1 & 3
+        \end{bmatrix}
+    \end{align*}
+
+    Ahora nos damos cuenta que lo único que nos pide el teorema de la función inversa es que el determinante de la derivada sea distinto de $0$ en el punto de interés, verifiquemos eso
+    \begin{equation*}
+        \det \begin{bmatrix}
+            4 & 11\\
+            1 & 3
+        \end{bmatrix} = 4 \cdot 3 - 11 = 1
+    \end{equation*}
+
+    Por el teorema de la función inversa, existen vecindades de $(1, 1)$ y de $f(1, 1)$ tal que la función sea invertible. Además notemos que $f(1, 1) = (12, 2)$, por lo tanto sabemos que podemos calcular la derivada de $Df^{-1}(12, 2)$ como
+    \begin{equation*}
+        Df^{-1}(12, 2) = {(Df(1, 1))}^{-1} = \begin{bmatrix}
+            4 & 11\\
+            1 & 3
+        \end{bmatrix}^{-1} = \begin{bmatrix}
+            3 & -11\\
+            -1 & 4
+        \end{bmatrix} = \begin{bmatrix}
+            \partial_x f^{-1}_1(12, 2) & \partial_y f^{-1}_1(12, 2)\\
+            \partial_x f^{-1}_2(12, 2) & \partial_y f^{-1}_2(12, 2)
+        \end{bmatrix}
+    \end{equation*}
+\end{sol}
+
+\begin{prob}
+    Considere el siguiente sistema de ecuaciones
+    \begin{align*}
+        x^3 + xy - y^2 &= 1\\
+        y^3 - 3xy + x^2 &= -1
+    \end{align*}
+
+    Muestre que el sistema tiene solución única cerca del punto $(1, 1)$.
+\end{prob}
+\begin{sol}
+    Este también es un problema típico que es aplicación directa del TFI, hagámoslo. Lo primero que haremos sera definir una función que tenga la información del sistema, esta viene dada por
+    \begin{align*}
+        f : \RR^2 &\to \RR^2\\
+        (x, y) &\mapsto (x^3 + xy - y^2, y^3 - 3xy + x^2)
+    \end{align*}
+
+    Notemos además que $f(1, 1) = (1, -1)$, por lo tanto, lo que queremos es que esta $f$ sea invertible en una vecindad del $(1, 1)$, para esto aplicamos el TFI.\@ Calculemos la derivada
+    \begin{equation*}
+        {Df(1, 1)}_{2 \times 2} = \begin{bmatrix}
+            \partial_x f_1(1, 1) & \partial_y f_1(1, 1)\\
+            \partial_x f_2(1, 1) & \partial_y f_2(1, 1)
+        \end{bmatrix} = \begin{bmatrix}
+            3x^2 + y & x - 2y\\
+            -3y + 2x & 3y^2 - 3x
+        \end{bmatrix}_{(x, y) = (1, 1)} = \begin{bmatrix}
+            4 & -1\\
+            -1 & 0
+        \end{bmatrix}
+    \end{equation*}
+
+    Ahora tenemos que verificar que el determinante es distinto de $0$. Notemos que $\det Df(1, 1) = -1$. Por el teorema de la función inversa, tenemos que es invertible en una vecindad del $(1, 1)$ y es justo lo que nos pedían.
+\end{sol}
+
+\end{document}

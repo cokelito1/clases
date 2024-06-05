@@ -1,0 +1,306 @@
+\documentclass[a4paper,oneside,10.5pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[spanish]{babel}
+%\usepackage[french]{babel}
+\usepackage[autolanguage]{numprint}
+\usepackage{hyperref}
+\usepackage{verbatim}
+\usepackage{fancyhdr}
+\usepackage{url}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{fullpage}
+\usepackage{mathrsfs}
+\usepackage{calrsfs}  %letras caligráficas
+\usepackage{enumerate}
+\usepackage{geometry}
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+\geometry{vmargin=2cm, hmargin=1.8cm}
+\usepackage{arydshln} %hacer lineas punteada
+\usepackage{color} %colores
+\usepackage[all,cmtip]{xy} %% diagramas conmutativos
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\newcommand{\blue}[1]{{\color[rgb]{0,0,1} {#1}}}
+
+\bibliographystyle{alpha}
+
+\pagestyle{empty}
+
+\newcommand*{\transp}[2][-3mu]{\ensuremath{\mskip1mu\prescript{\smash{\mathrm t\mkern#1}}{}{\mathstrut#2}}} %% la transpuesta a la izquierda es mejor :-P
+
+\newcommand*{\TakeFourierOrnament}[1]{{%
+\fontencoding{U}\fontfamily{futs}\selectfont\char#1}}
+\newcommand*{\danger}{\TakeFourierOrnament{66}} %%% atencion!
+
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\hom}{\operatorname{Hom}}
+\newcommand\FF{\mathbb{F}}
+\newcommand\PP{\mathbb{P}}
+\newcommand\RR{\mathbb{R}}
+\newcommand\CC{\mathbb{C}}
+\newcommand\ZZ{\mathbb{Z}}
+\newcommand\QQ{\mathbb{Q}}
+\newcommand\NN{\mathbb{N}}
+\newcommand\A{\mathcal{A}}
+\newcommand\h{\operatorname{H}}
+\newcommand\Id{\operatorname{Id}}
+\newcommand\mult{\operatorname{mult}}
+\newcommand\GL{\operatorname{GL}}
+\newcommand\Vect{\operatorname{Vect}}
+\newcommand\PC{\operatorname{PC}}
+\newcommand\dd{\mathrm{d}}
+\newcommand\Cinf{\mathcal{C}^\infty}
+\newcommand\isomorphisme{\stackrel{\simeq}{\longrightarrow}}
+
+\newenvironment{amatrix}[1]{%
+  \left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right)
+}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\theoremstyle{definition}
+\newtheorem{defi}{Definición}[section]
+\theoremstyle{plain}
+\newtheorem{prop}[defi]{Proposición}
+\newtheorem{lemm}[defi]{Lema}
+\newtheorem{teo}[defi]{Teorema}
+\newtheorem*{teo*}{Teorema}
+\newtheorem{coro}[defi]{Corolario}
+\theoremstyle{remark}
+\newtheorem{ejem}[defi]{Ejemplo}
+\newtheorem{obs}[defi]{Observación}
+\theoremstyle{theorem}
+\newtheorem{prob}{Problema}
+\newtheorem{sol}{Solución}
+
+
+\DeclareMathOperator\id{Id}
+\DeclareMathOperator\IIm{Im}
+\DeclareMathOperator\RRe{Re}
+\DeclareMathOperator\vol{vol}
+\DeclareMathOperator\Ker{Ker}
+\DeclareMathOperator\End{End}
+\DeclareMathOperator\Hom{Hom}
+\DeclareMathOperator\pr{pr}
+\DeclareMathOperator\Aut{Aut}
+\renewcommand\Im{\IIm}
+\renewcommand\Re{\RRe}
+
+\hypersetup{
+pdfauthor = {Jorge Bravo},
+pdfsubject = {MAT023 2024},
+pdftitle = {Teorema de la Funcion Implicita},
+pdfkeywords = {},
+}
+
+\setlength\parindent{0px}
+\begin{document}
+
+
+\begin{center}
+{\Large \textsc{Teorema de la Función Implícita}}\\
+\vspace{1em}
+\textsc{Ayudante: Jorge Bravo}\\
+\end{center}
+
+\section*{Enunciado del Teorema}
+\teo[Función Implícita] Sea 
+\begin{gather*}
+    f : \RR^n \times \RR^m \to \RR^m\\
+    (x, y) \mapsto f(x, y)
+\end{gather*}
+una función de clase $\mathcal{C}^{1}$. Sea $(a, b) \in \RR^n \times \RR^m$ un punto tal que se cumpla que
+\begin{equation*}
+    f(a, b) = 0
+\end{equation*}
+
+y que también se cumpla que $D_yf(a, b)$ sea invertible (equivalente a que su determinante sea distinto de $0$). Entonces existen vecindades $\mathcal{U} \subset \RR^n$ del punto $a$ y $\mathcal{V} \subset \RR^m$ del punto $b$ tal que se tiene lo siguiente
+
+\begin{enumerate}
+    \item Existe la siguiente funci\'on de clase $\mathcal{C}^1$
+    \begin{gather*}
+        \varphi : \mathcal{U} \subset \RR^n \to \mathcal{V} \subset \RR^m\\
+        x \mapsto y(x)
+    \end{gather*}
+    tal que se tiene que $f(x, \varphi(x)) = 0, \forall x \in \mathcal{U}$
+    \item Se tiene la siguiente igualdad para la derivada de $\varphi$ en el punto $a$
+    \begin{equation*}
+        D\varphi(a) = -(D_{y}f(a, b))^{-1} Df(a, b)
+    \end{equation*}
+\end{enumerate}
+
+\section*{Problemas Resueltos}
+\prob Muestre que el sistema
+\begin{align*}
+    x^3 + uy^2 + v &= 0\\
+    y^3 + yv + x^2 &= 0
+\end{align*}
+define a $u$ y $v$ como funciones de $x$ e $y$ en vecindades de los puntos $(x, y) = (0, 1)$ y $(u, v) = (1, -1)$. Sea $w = (1, 1)$, determine la derivada direccional de $v = v(x, y)$ en el punto $(0, 1)$ en la dirección de $w$.
+
+\sol Lo primero que queremos ver es que $u$ y $v$ se definen como funciones implícitas cerca del punto $(x, y, u, v) = (0, 1, 1, -1)$. Notemos que tenemos $2$ ecuaciones, $2$ variables ``conocidas'' (independientes) y $2$ variables ``desconocidas'' (dependientes), por lo tanto nos armamos la siguiente función
+\begin{gather*}
+    f : \RR^2 \times \RR^2 \to \RR^2\\
+    ((x, y), (u, v)) \mapsto (x^3 + uy^2 + v, y^3 + yv + x^2)
+\end{gather*}
+
+Darse cuenta que $f$ es de clase $\mathcal{C}^{-1}$ por álgebra de funciones $\mathcal{C}^1$. Notemos además que $f((0, 1), (1, -1)) = (0, 0)$ y veamos cuales derivadas tenemos que calcular para aplicar el teorema de la función implícita.
+
+\begin{equation*}
+    Df((0,1), (1, -1))_{2 \times 4} = \left[\begin{array}{cc|cc}
+        \partial_x f_1 & \partial_y f_1 & \partial_u f_1 & \partial_v f_1\\
+        \partial_x f_2 & \partial_y f_2 & \partial_u f_2 & \partial_v f_2\\
+    \end{array}
+    \right]_{((x, y), (u, v)) = ((0, 1), (1 -1))}
+\end{equation*}
+
+Como despues nos piden obtener la derivada direccional de $v(x, y)$ necesitaremos todas las derivadas asi que calculemos todas de al tiro.
+
+\begin{equation}
+    Df((0,1), (1, -1))_{2 \times 4} = \left[\begin{array}{cc|cc}
+        3x^2 & 2uy & y^2 & 1\\
+        2x & 3y^2 + v & 0 & y
+    \end{array}
+    \right]_{((x, y), (u, v)) = ((0, 1), (1 -1))} = \left[\begin{array}{cc|cc}
+        0 & 2 & 1 & 1\\
+        0 & 2 & 0 & 1
+    \end{array}
+    \right]
+\end{equation}
+
+Recordemos que siempre, si dejamos las variables que no conocemos a la derecha, la matriz de la derecha sera $D_{(u, v)}f((0, 1), (1, -1))$, cuando le calculamos el determinante a esa matriz, es decir a $\begin{bmatrix}1 & 1\\ 0 & 1\end{bmatrix}$, nos da $1$ y por tanto es invertible.
+
+Por lo tanto, por el teorema de la función implícita, existen vecindades $\mathcal{U} \subset \RR^2$ de $(0, 1)$ y $\mathcal{V} \subset \RR^2$ de $(1, -1)$ y la siguiente función
+\begin{gather*}
+    \varphi : \mathcal{U} \subset \RR^2 \to \mathcal{V} \subset \RR^2\\
+    (x, y) \mapsto (u(x, y), v(x, y))
+\end{gather*}
+La cual cumple que
+\begin{equation*}
+f((x, y), (\varphi(x, y)) = 0, \forall (x, y) \in \mathcal{U}
+\end{equation*}
+Es decir que $\varphi$ define de manera implícita a $u$ y $v$ en función de $x$ e $y$.
+
+Tambien sabemos que la derivada de $\varphi$ en el punto $(0, 1)$ viene dada por
+\begin{equation}
+\begin{bmatrix}
+    \partial_x u & \partial_y u\\
+    \partial_x v & \partial_y v
+\end{bmatrix}_{(x, y) = (0, 1)}= D\varphi(0, 1) = -(D_{(u, v)}f((0, 1), (1, -1)))^{-1} D_{(x, y)}f((0, 1), (1, -1))
+\end{equation}
+
+Ahora queremos calcular la derivada direccional de $v(x, y)$ en el punto $(0, 1)$ en la dirección de $w$. Para esto recordemos que la derivada direccional de una función diferenciables viene dada por
+
+\begin{equation}
+    \frac{\partial v}{\partial w}(0, 1) = \nabla v(0, 1) \cdot \frac{w}{||w||} = \begin{bmatrix} \partial_x v(0, 1) & \partial_y v(0, 1) \end{bmatrix} \cdot \frac{\begin{bmatrix}
+        1 & 1
+    \end{bmatrix}}{\sqrt{1^2 + 1^2}} = \frac{1}{\sqrt2}(\partial_x v(0, 1) + \partial_y v(0, 1))
+\end{equation}
+
+Por lo tanto solo nos falta conocer $\partial_x v(0, 1)$ y $\partial_y v(0, 1)$, pero estos los podemos obtener desde la derivada de $\varphi$ desde la ecuación $(2)$. Pero esas matrices ya las calculamos antes en la ecuación $(1)$, por lo que solo tenemos que multiplicar y ver que nos da
+
+\begin{equation*}
+    D\varphi(0, 1) = -(D_{(u, v)}f((0, 1), (1, -1)))^{-1} D_{(x, y)}f((0, 1), (1, -1)) = - \begin{bmatrix}
+        1 & -1\\ 0 & 1
+    \end{bmatrix}\begin{bmatrix}
+        0 & 2\\ 0 & 2
+    \end{bmatrix} = \begin{bmatrix}
+        0 & 0\\ 0 & 2
+    \end{bmatrix}
+\end{equation*}
+
+Por lo tanto recordamos de $(2)$ que
+\begin{equation*}
+    \begin{bmatrix}
+    \partial_x u & \partial_y u\\
+    \partial_x v & \partial_y v
+\end{bmatrix}_{(x, y) = (0, 1)}= D\varphi(0, 1) =\begin{bmatrix}
+        0 & 4\\ 0 & 2
+    \end{bmatrix}
+\end{equation*}
+
+Por lo tanto $\partial_x v(0, 1) = 0$ y $\partial_y v(0,1) = 2$
+
+Reemplazando en $(3)$ entonces obtenemos que
+\begin{equation*}
+    \frac{\partial v}{\partial w}(0, 1) = \frac{1}{\sqrt2}(0 + 2) = \frac{2}{\sqrt{2}} = \frac{2}{\sqrt2} \cdot \frac{\sqrt2}{\sqrt2} = \sqrt{2}
+\end{equation*}
+
+\prob Considere el siguiente sistema de ecuaciones
+\begin{align*}
+    xu^2 + 2y^2v^2 + uvz &= 1\\
+    vx^2 - y^2 + uv^2 &= 0
+\end{align*}
+
+Muestre que el sistema define funciones implícitas $u = u(x, y, z)$ y $v = (x,y,z)$, en una vecindad del punto $(0, -1, 1, 1, -1)$. Justifique
+
+\sol Sabemos que cuando queremos ver que un sistema define de manera implícita a ciertas variables en funciones de otras, lo mejor que podemos hacer es usar el teorema de la función implícita. Notemos que ``conocemos'' $3$ variables $(x, y, z)$ y ``desconocemos'' a $2$, $(u, v)$. Por lo tanto definimos la siguiente función
+
+\begin{gather*}
+    f: \RR^3 \times \RR^2 \to \RR^2\\
+    ((x, y, z), (u, v)) \mapsto (xu^2 + 2y^2v^2 + uvz - 1, vx^2 - y^2 + uv^2)
+\end{gather*}
+Notemos que esta función es de clase $\mathcal{C}^1$ pues es un polinomio en $5$ variables (otra opción es argumentar por álgebra de funciones $\mathcal{C}^1$).
+
+Luego evaluamos en el punto para ver que se satisface que $f((0, -1, 1), (1, -1)) = (0, 0)$
+\begin{equation*}
+    f((0, -1, 1), (1, -1)) = (0 + 2 - 1 - 1, -1 + 1) = (0, 0)
+\end{equation*}
+
+Por lo tanto nos falta verificar que la derivada con respecto a las variables que no conocemos tiene determinante distinto de $0$, recordemos quien es esta derivada en el punto $((0, -1, 1), (1, -1))$
+\begin{equation*}
+    Df((0, -1, 1), (1, -1)_{2 \times 5} = \left[\begin{array}{ccc|cc}
+        \partial_x f_1 & \partial_y f_1 & \partial_z f_1 & \partial_u f_1 & \partial_v f_1\\
+        \partial_x f_2 & \partial_y f_2 & \partial_z f_2 & \partial_u f_2 & \partial_v f_2\\
+    \end{array}
+    \right]_{((x, y, z), (u, v)) = ((0, -1, 1), (1 -1))}
+\end{equation*}
+
+Recordemos que la derivada que nos interesa es la matriz que queda a la derecha (siempre que seamos ordenados y definamos a $f$ de la manera correcta), la cual llamamos $D_{(u, v)}f$, dado que no necesitaremos las derivadas de $u(x, y, z)$ ni $v(x, y, z)$ no es necesario calcular las derivadas de la izquierda, por lo que solo calcularemos la que nos interesa.
+
+\begin{align*}
+    D_{(u, v)}f((0, -1, 1), (1 -1)) &= \begin{bmatrix}
+        \partial_u f_1 & \partial_v f_1\\
+        \partial_u f_2 & \partial_v f_2
+    \end{bmatrix}_{((x, y, z), (u, v)) = ((0, -1, 1), (1 -1))}\\
+    &= \begin{bmatrix}
+            2xu + vz & 4y^2v + uz\\
+            v^2 & x^2 + 2uv
+        \end{bmatrix}_{((x, y, z), (u, v)) = ((0, -1, 1), (1 -1))}\\
+    &= \begin{bmatrix}
+        -1 & -3\\
+        1 & -2
+        \end{bmatrix}
+\end{align*}
+
+Luego queremos saber si esta matriz es invertible, para poder aplicar el teorema de la función implícita, por lo que calcularemos su determinante para ver que es distinto de $0$.
+
+\begin{equation*}
+    \det \begin{bmatrix}
+        -1 & -3\\
+        1 & -2
+        \end{bmatrix} = 2 + 3 = 5
+\end{equation*}
+
+Por lo tanto es invertible. Por el teorema de la Función Implícita existen vecindades $\mathcal{U} \subset \RR^3$ de $(0, -1, 1)$ y $\mathcal{V} \subset \RR^2$ de $(1, -1)$ de tal forma que existe la función
+\begin{gather*}
+    \varphi : \mathcal{U} \subset \RR^3 \to \mathcal{V} \subset \RR^2\\
+    (x, y, z) \mapsto (u(x, y, z), v(x, y, z))
+\end{gather*}
+
+que cumple que $f((x, y, z), \varphi(x, y, z)) = 0, \forall (x, y, z) \in \mathcal{U}$, en otras palabras, $f$ define a $u$ y $v$ de manera implícita en función de $x, y, z$.
+\end{document}

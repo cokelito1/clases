@@ -1,0 +1,287 @@
+\documentclass[a4paper,oneside,10.5pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[spanish]{babel}
+%\usepackage[french]{babel}
+\usepackage[autolanguage]{numprint}
+\usepackage{hyperref}
+\usepackage{verbatim}
+\usepackage{fancyhdr}
+\usepackage{url}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{fullpage}
+\usepackage{mathrsfs}
+\usepackage{calrsfs}  %letras caligráficas
+\usepackage{enumerate}
+\usepackage{geometry}
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+\geometry{vmargin=2cm, hmargin=1.8cm}
+\usepackage{arydshln} %hacer lineas punteada
+\usepackage{color} %colores
+\usepackage[all,cmtip]{xy} %% diagramas conmutativos
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\newcommand {\blue}[1]{{\color[rgb]{0,0,1} {#1}}}
+
+\bibliographystyle{alpha}
+
+\pagestyle{empty}
+
+\newcommand*{\transp}[2][-3mu]{\ensuremath{\mskip1mu\prescript{\smash{\mathrm t\mkern#1}}{}{\mathstrut#2}}} %% la transpuesta a la izquierda es mejor :-P
+
+\newcommand*{\TakeFourierOrnament}[1]{{%
+\fontencoding{U}\fontfamily{futs}\selectfont\char#1}}
+\newcommand*{\danger}{\TakeFourierOrnament{66}} %%% atencion!
+
+\renewcommand\epsilon\varepsilon
+\renewcommand\phi\varphi
+\renewcommand{\hom}{\operatorname{Hom}}
+\newcommand\FF{\mathbb{F}}
+\newcommand\PP{\mathbb{P}}
+\newcommand\RR{\mathbb{R}}
+\newcommand\CC{\mathbb{C}}
+\newcommand\ZZ{\mathbb{Z}}
+\newcommand\QQ{\mathbb{Q}}
+\newcommand\NN{\mathbb{N}}
+\newcommand\A{\mathcal{A}}
+\newcommand\h{\operatorname{H}}
+\newcommand\Id{\operatorname{Id}}
+\newcommand\mult{\operatorname{mult}}
+\newcommand\GL{\operatorname{GL}}
+\newcommand\Vect{\operatorname{Vect}}
+\newcommand\PC{\operatorname{PC}}
+\newcommand\dd{\mathrm{d}}
+\newcommand\Cinf{\mathcal{C}^\infty}
+\newcommand\isomorphisme{\stackrel{\simeq}{\longrightarrow}}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\theoremstyle{definition}
+\newtheorem{defi}{Definición}[section]
+\theoremstyle{plain}
+\newtheorem{prop}[defi]{Proposición} %test
+\newtheorem{lemm}[defi]{Lema}
+\newtheorem{teo}[defi]{Teorema}
+\newtheorem*{teo*}{Teorema}
+\newtheorem{coro}[defi]{Corolario}
+\theoremstyle{remark}
+\newtheorem{ejem}[defi]{Ejemplo}
+\newtheorem{obs}[defi]{Observación}
+\theoremstyle{theorem}
+\newtheorem{prob}{Problema}
+\newtheorem{sol}{Solución}
+
+
+\DeclareMathOperator\id{Id}
+\DeclareMathOperator\IIm{Im}
+\DeclareMathOperator\RRe{Re}
+\DeclareMathOperator\vol{vol}
+\DeclareMathOperator\Ker{Ker}
+\DeclareMathOperator\End{End}
+\DeclareMathOperator\Hom{Hom}
+\DeclareMathOperator\pr{pr}
+\DeclareMathOperator\Aut{Aut}
+\renewcommand\Im{\IIm}
+\renewcommand\Re{\RRe}
+
+\hypersetup{
+pdfauthor = {Jorge Bravo},
+pdfsubject = {MAT227 2024-1},
+pdftitle = {Tarea 1 MAT227},
+pdfkeywords = {},
+}
+
+\setlength\parindent{0px}
+\begin{document}
+
+
+\begin{center}
+{\Large \textsc{Regla de la Cadena}}\\
+\vspace{1em}
+\textsc{Ayudante: Jorge Bravo}\\
+\end{center}
+
+\section*{Enunciado}
+\teo{Regla de la Cadena:} Sea $f: \RR^{n} \to \RR^p$ y $g: \RR^p \to \RR^m$ funciones de clase $\mathcal{C}^1$. Luego la función
+\begin{gather*}
+    g \circ f : \RR^n \to \RR^m\\
+    x \mapsto g(f(x))
+\end{gather*}
+Es de clase $\mathcal{C}^1$ y se cumple que
+\begin{equation*}
+    D(g \circ f)(x)_{m \times n} = Dg(f(x))_{m \times p} Df(x)_{p \times n}
+\end{equation*}
+
+\section*{Intuici\'on}
+Recordemos que la derivada de una función es la mejor mejor aproximación lineal a la función en un punto. Por lo tanto si tenemos la composición de $2$ funciones y quisiéramos saber cual es la mejor aproximación lineal a esta, uno podría pensar que la mejor aproximación lineal a la composición es la composiciones de las mejores aproximaciones lineales de cada función, esto es justo lo que nos dice la regla de la cadena, pues recordemos que la multiplicación de matrices representa la composición de funciones lineales.
+
+\section*{Problemas}
+
+\begin{prob}
+    Dada una función diferenciable $g: \RR^3 \to \RR$, se define una función $f(t) = g(t, t^2 - 4, e^{t - 2})$. Calcular $\frac{d}{dt}f(2)$, si se sabe que
+    \begin{gather*}
+      \frac{\partial g}{\partial x}(2, 0, 1) = 4\\
+      \frac{\partial g}{\partial y}(2, 0, 1) = 2\\
+      \frac{\partial g}{\partial z}(2, 0, 1) = 2
+    \end{gather*}
+\end{prob}
+
+\begin{sol}
+Notemos que nos están preguntando $Df(2)$, donde $f$ es una función compuesta con otra, esto lo podemos ver si definimos la función
+\begin{gather*}
+    h : \RR \to \RR^3\\
+    t \mapsto (t, t^2 - 4, e^{t - 2})
+\end{gather*}
+
+Luego notamos que $f(t) = (g \circ h)(t)$. Por la regla de la cadena tenemos que
+\begin{equation*}
+    Df(2) = D(g \circ h)(2) = Dg(h(2))_{1 \times 3} \cdot Dh(2)_{3 \times 1}
+\end{equation*}
+
+Calculemos $Dh(2)$, esta sera una matriz $3 \times 1$ (pues la función va de $\RR$ a $\RR^3$) y viene dada por
+\begin{equation*}
+    Dh(2) = \begin{bmatrix}
+        \partial_t h_1(2)\\ \partial_t h_2(2)\\ \partial_t h_3(2)
+    \end{bmatrix}
+\end{equation*}
+
+Calculemos
+\begin{gather*}
+    \partial_t h_1 = \partial_t (t) = 1\\
+    \partial_t h_2 = \partial_t (t^2 - 4) = 2t\\
+    \partial_t h_3 = \partial_t (e^{t - 2}) = e^{t - 2}
+\end{gather*}
+
+luego evaluando en $2$ tenemos que
+\begin{equation*}
+    Dh(2) = \begin{bmatrix}
+        1\\ 4\\ 1
+    \end{bmatrix}
+\end{equation*}
+
+Ahora nos falta calcular $Dg(h(2))$, primero veamos quien es $h(2)$
+\begin{equation*}
+    h(2) = (2, 0, 1)
+\end{equation*}
+
+Por lo tanto queremos calcular
+\begin{equation*}
+    Dg(h(2)) = Dg(2, 0, 1)
+\end{equation*}
+
+Pero recordemos que $Dg(2, 0, 1)$ es una matriz $1 \times 3$ que tiene la forma
+\begin{equation*}
+    Dg(2, 0, 1) = \begin{bmatrix}
+        \partial_x g (2, 0, 1)& \partial_y g(2, 0, 1) & \partial_z g(2, 0, 1)
+    \end{bmatrix}
+\end{equation*}
+
+Pero notemos que estos son justo los valores que nos dan, por lo tanto tenemos que
+\begin{equation*}
+    Dg(2, 0, 1) = \begin{bmatrix}
+        4 & 2 & 2
+    \end{bmatrix}
+\end{equation*}
+
+Por lo tanto tenemos que
+\begin{equation*}
+    Df(2) = D(g \circ h)(2) = Dg(h(2)) \cdot Dh(2) = \begin{bmatrix}
+        4 & 2 & 2
+    \end{bmatrix} \begin{bmatrix}
+        1\\ 4\\ 1
+    \end{bmatrix} = \begin{bmatrix} 14 \end{bmatrix}
+\end{equation*}
+
+Por lo tanto $\frac{df}{dt}(2) = 14$
+\end{sol}
+
+\begin{prob}
+Considere $p(x, y) = (\cos y + x^2, e^{x + y})$ y $q(u, v) = (e^{u^2}, u - \sin v)$. Calcular la matriz Jacobiana en el punto $(0, 0)$
+\end{prob}
+
+\begin{sol}
+Recordemos que la matriz Jacobiana de $p \circ q$ es la derivada. Por lo tanto nos están preguntando por $D(p \circ q)(0, 0)$.
+
+Por la regla de la cadena sabemos que
+\begin{equation*}
+    D(p \circ q)(0, 0) = Dp(q(0, 0))_{2 \times 2} \cdot Dq(0, 0)_{2 \times 2}
+\end{equation*}
+
+Donde las dimensiones de las matrices son $2 \times 2$, pues ambas funciones van de $\RR^2 \to \RR^2$. Partamos calculando $Dq(0 ,0)$, recordemos que esta matriz es de la forma
+\begin{equation*}
+    Dq(0, 0) = \begin{bmatrix}
+        \partial_u q_1(0, 0) & \partial_v q_1(0, 0)\\
+        \partial_u q_2(0, 0) & \partial_v q_2(0, 0)
+    \end{bmatrix}
+\end{equation*}
+
+Calculemos cada una de estas derivadas
+\begin{gather*}
+    \partial_u q_1 = \partial_u (e^{u^2}) = e^{u^2} \cdot 2 u\\
+    \partial_u q_2 = \partial_u (u - \sin v) = 1\\
+    \partial_v q_1 = \partial_v (e^{u^2}) = 0\\
+    \partial_v q_2 = \partial_v (u - \sin v) = - \cos v
+\end{gather*}
+
+Ahora evaluando y reemplazando obtenemos que
+\begin{equation*}
+    Dq(0, 0) = \begin{bmatrix}
+        0 & 0\\
+        1 & -1
+    \end{bmatrix}
+\end{equation*}
+
+Ahora nos falta calcular $Dp(q(0, 0))$, primero calculemos quien es $q(0, 0)$
+\begin{equation*}
+    q(0, 0) = (1, 0)
+\end{equation*}
+
+Luego queremos calcular $Dp(1, 0)$, recordemos que $Dp(1, 0)$ tiene a forma
+\begin{equation*}
+    Dp(1, 0) = \begin{bmatrix}
+        \partial_x p_1(1, 0) & \partial_y p_1(1, 0)\\
+        \partial_x p_2(1, 0) & \partial_y p_2(1, 0)
+    \end{bmatrix}
+\end{equation*}
+
+Calculamos cada una de las derivadas
+\begin{gather*}
+    \partial_x p_1 = \partial_x (\cos y + x^2) = 2x\\
+    \partial_x p_2 = \partial_x (e^{x + y}) = e^{x + y}\\
+    \partial_y p_1 = \partial_y (\cos y + x^2) = -\sin y\\
+    \partial_y p_2 = \partial_y (e^{x + y}) = e^{x + y}
+\end{gather*}
+
+Luego reemplazando y evaluando obtenemos
+\begin{equation*}
+    Dp(q(0, 0)) = Dp(1, 0) = \begin{bmatrix}
+        2 & 0\\
+        e & e
+    \end{bmatrix}
+\end{equation*}
+
+Por lo tanto tenemos que
+\begin{equation*}
+    D(p \circ q)(0, 0) = \begin{bmatrix}
+        2 & 0\\
+        e & e
+    \end{bmatrix}\begin{bmatrix}
+        0 & 0\\
+        1 & -1
+    \end{bmatrix} = \begin{bmatrix}
+        0 & 0\\ e & -e
+    \end{bmatrix}
+\end{equation*}
+\end{sol}
+\end{document}

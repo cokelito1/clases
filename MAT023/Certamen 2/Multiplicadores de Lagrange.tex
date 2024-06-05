@@ -1,0 +1,301 @@
+\documentclass[a4paper,oneside,10.5pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[spanish]{babel}
+\usepackage[autolanguage]{numprint}
+\usepackage{hyperref}
+\usepackage{verbatim}
+\usepackage{fancyhdr}
+\usepackage{url}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{fullpage}
+\usepackage{mathrsfs}
+\usepackage{calrsfs}  %letras caligráficas
+\usepackage{enumerate}
+\usepackage{geometry}
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+\geometry{vmargin=2cm, hmargin=1.8cm}
+\usepackage{arydshln}
+\usepackage{color}
+\usepackage[all,cmtip]{xy} %% diagramas conmutativos
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\newcommand{\blue}[1]{{\color[rgb]{0,0,1} {#1}}}
+
+\bibliographystyle{alpha}
+
+\pagestyle{empty}
+
+\newcommand*{\transp}[2][-3mu]{\ensuremath{\mskip1mu\prescript{\smash{\mathrm t\mkern#1}}{}{\mathstrut#2}}} %% la transpuesta a la izquierda es mejor :-P
+
+\newcommand*{\TakeFourierOrnament}[1]{{%
+\fontencoding{U}\fontfamily{futs}\selectfont\char#1}}
+\newcommand*{\danger}{\TakeFourierOrnament{66}} %%% atencion!
+
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\hom}{\operatorname{Hom}}
+\newcommand\FF{\mathbb{F}}
+\newcommand\PP{\mathbb{P}}
+\newcommand\RR{\mathbb{R}}
+\newcommand\CC{\mathbb{C}}
+\newcommand\ZZ{\mathbb{Z}}
+\newcommand\QQ{\mathbb{Q}}
+\newcommand\NN{\mathbb{N}}
+\newcommand\A{\mathcal{A}}
+\newcommand\h{\operatorname{H}}
+\newcommand\Id{\operatorname{Id}}
+\newcommand\mult{\operatorname{mult}}
+\newcommand\GL{\operatorname{GL}}
+\newcommand\Vect{\operatorname{Vect}}
+\newcommand\PC{\operatorname{PC}}
+\newcommand\dd{\mathrm{d}}
+\newcommand\Cinf{\mathcal{C}^\infty}
+\newcommand\isomorphisme{\stackrel{\simeq}{\longrightarrow}}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\theoremstyle{definition}
+\newtheorem{defi}{Definición}[section]
+\theoremstyle{plain}
+\newtheorem{prop}[defi]{Proposición} %test
+\newtheorem{lemm}[defi]{Lema}
+\newtheorem{teo}[defi]{Teorema}
+\newtheorem*{teo*}{Teorema}
+\newtheorem{coro}[defi]{Corolario}
+\theoremstyle{remark}
+\newtheorem{ejem}[defi]{Ejemplo}
+\newtheorem{obs}[defi]{Observación}
+\theoremstyle{theorem}
+\newtheorem{prob}{Problema}
+\newtheorem{sol}{Solución}
+
+
+\DeclareMathOperator\id{Id}
+\DeclareMathOperator\IIm{Im}
+\DeclareMathOperator\RRe{Re}
+\DeclareMathOperator\vol{vol}
+\DeclareMathOperator\Ker{Ker}
+\DeclareMathOperator\End{End}
+\DeclareMathOperator\Hom{Hom}
+\DeclareMathOperator\pr{pr}
+\DeclareMathOperator\Aut{Aut}
+\renewcommand\Im{\IIm}
+\renewcommand\Re{\RRe}
+
+\hypersetup{
+pdfauthor = {Jorge Bravo},
+pdfsubject = {MAT023 2024},
+pdftitle = {Multiplicadores de Lagrange},
+pdfkeywords = {},
+}
+
+\setlength\parindent{0px}
+\begin{document}
+
+
+\begin{center}
+{\Large \textsc{Multiplicadores de Lagrange}}\\
+\vspace{1em}
+\textsc{Ayudante: Jorge Bravo}\\
+\end{center}
+
+\section*{Problemas}
+\begin{prob}
+    La temperatura $(x, y)$ de una placa de metal es $T(x, y) = 4x^2 - 4xy + y^2$. Una hormiga camina sobre la placa alrededor de una circunferencia centrada en el origen y de radio 5. Cual es la mayor y menor temperatura con la que se encuentra la hormiga?
+\end{prob}
+
+\begin{sol}
+    Dado que la hormiga se encuentra sobre una circunferencia de radio 5 centrada en el origen, los puntos por los que se mueve deben satisfacer
+    \begin{equation*}
+        x^2 + y^2 = 5^2
+    \end{equation*}
+
+    Además notemos que $T$ es una función de clase $\mathcal{C}^\infty$, por lo tanto podemos ocupar el método de multiplicadores de Lagrange. Defininamos
+    \begin{gather*}
+        g : \RR^2 \to \RR\\
+        (x, y) \mapsto x^2 + y^2 - 5^2
+    \end{gather*}
+
+    Ahora queremos resolver el sistema
+    \begin{equation*}
+        Df(x, y) = \lambda Dg(x, y)
+    \end{equation*}
+
+    Calculemos las derivadas.
+    \begin{gather*}
+        Df(x, y) = \begin{bmatrix} \partial_x f & \partial_y f \end{bmatrix} = \begin{bmatrix}
+            8x - 4y  & -4x + 2y
+        \end{bmatrix}\\
+        Dg(x, y) = \begin{bmatrix}
+            \partial_x g & \partial_y g
+        \end{bmatrix} = \begin{bmatrix}
+            2x & 2y
+        \end{bmatrix}
+    \end{gather*}
+
+    Luego el nos queda que
+    \begin{equation*}
+        \begin{bmatrix}
+            8x - 4y  & -4x + 2y
+        \end{bmatrix} = \begin{bmatrix}
+            2\lambda x & 2 \lambda y
+        \end{bmatrix}
+    \end{equation*}
+
+    Es decir queremos resolver el sistema
+    \begin{align*}
+        8x - 4y &= 2\lambda x\\
+        -4x + 2y &= 2\lambda y\\
+        x^2 + y^2 &= 25
+    \end{align*}
+
+    Dividiendo la primera ecuacion por $2$ obtenemos
+    \begin{align*}
+        4x - 2y &= \lambda x\\
+        -4x + 2y &= 2\lambda y\\
+        x^2 + y^2 &= 25
+    \end{align*}
+
+    Sumando la primera ecuacion con la segunda obtenemos
+    \begin{equation*}
+        0 = \lambda x + 2\lambda y \implies \lambda(x + 2y) = 0
+    \end{equation*}
+
+    \textbf{Caso 1: }$\lambda = 0$, si $\lambda = 0$, entonces de la primera ecuacion obtenemos que $2x = y$, reemplazando en la tercera ecuacion obtenemos
+    \begin{equation*}
+        x^2 + 4x^2 = 25 \implies x = \pm \sqrt{5}
+    \end{equation*}
+
+    Por lo tanto los puntos críticos para este caso son $P_1 = (\sqrt{5}, 2 \sqrt{5})$ y $P_2 = (-\sqrt{5}, -2\sqrt{5})$
+
+    \textbf{Caso 2: } $x + 2y = 0$, en este caso tenemos que $x = -2y$, reemplazamos en la 3ra ecuacion y obtenemos que
+    \begin{equation*}
+        {(-2y)}^{2} + y^2 = 25 \implies 5y^2 = 25 \implies y = \pm \sqrt{5}
+    \end{equation*}
+
+    Por lo que los puntos criticos son $P_3 = (-2\sqrt{5}, \sqrt{5})$ y $P_4 = (2\sqrt{5}, -\sqrt{5})$
+
+    Reemplazando en $T$ obtenemos que
+    \begin{align*}
+        T(\sqrt5, 2\sqrt5) = 4{(\sqrt5)}^2 - 4 \cdot \sqrt{5} \cdot 2\sqrt5 + {(2\sqrt{5})}^2 = 20 - 40 + 20 &= 0\\
+        T(-\sqrt5, -2\sqrt5) = 4{(-\sqrt5)}^2 - 4 \cdot (-\sqrt5) \cdot (-2\sqrt5) + {(-2\sqrt5)}^2 = 20 - 40 + 20 &= 0\\
+        T(-2\sqrt5, \sqrt5) = 4\cdot {(-2\sqrt5)}^2 -4\cdot(-2\sqrt5)\cdot\sqrt5 + \sqrt5^2 = 80 + 40 + 5 &= 125\\
+        T(2\sqrt5, -\sqrt5) = 4 \cdot {(2\sqrt5)}^2 - 4 \cdot (2\sqrt5) \cdot (-\sqrt5) + {(-\sqrt5)}^2 = 80 + 40 + 5 &= 125
+    \end{align*}
+
+    Por lo tanto la maxima temperatura que sentira la hormiga sera en de $125$ C en los puntos $(-2\sqrt5, \sqrt5)$ y $(2\sqrt5, -\sqrt5)$. La temperatura minima sera de $0$ C en los puntos $(\sqrt5, 2\sqrt5)$ y $(-\sqrt5, -2\sqrt5)$.
+\end{sol}
+
+\begin{prob}
+    La temperatura sobre una placa circular $\Omega = \{(x, y) \in \RR^2 \; | \; x^2 + y^2 \leq 1\}$ esta dada por $T(x, y) = 2x^2 + y^2$. Determinar los puntos sobre la placa que estan a mayor y menor temperatura.
+\end{prob}
+
+\begin{sol}
+    Notemos que la restricción viene dada por que los puntos deben vivir dentro de $\Omega$, para esto se debe cumplir que $x^2 + y^2 \leq 1$. Partamos viendo el caso donde $x^2 + y^2 < 1$. Notemos que la funcion $T$ es de clase $\mathcal{C}^\infty$
+
+    \textbf{Caso 1: } $x^2 + y^2 < 1$, para esto buscaremos los puntos criticos de $T$ mediante el gradiante. Para esto necesitamos que $DT(x, y) = (0,0)$, calculemos la derivada
+    \begin{equation*}
+        DT(x, y) = \begin{bmatrix}
+            \partial_x T & \partial_y T
+        \end{bmatrix} = \begin{bmatrix}
+            4x & 2y
+        \end{bmatrix}
+    \end{equation*}
+
+    Luego tenemos que $4x = 0$ e $2y = 0$, por lo tanto el único punto critico es el $(0, 0)$, notemos que $0^2 + 0^2 \leq 1$ y por lo tanto satisface la restricción. Por lo que nuestro primer punto critico es $P_1 = (0, 0)$.
+
+    \textbf{Caso 2: }: $x^2 + y^2 = 1$, usaremos multiplicadores de Lagrange, luego definimos
+    \begin{gather*}
+        g: \RR^2 \to \RR\\
+        (x, y) \mapsto x^2 + y^2 - 1
+    \end{gather*}
+
+    Entonces queremos que
+    \begin{equation*}
+        DT(x, y) = \lambda Dg(x, y)
+    \end{equation*}
+
+    Calculemos las derivadas de $g$, pues la derivada de $T$ ya la calculamos.
+    \begin{equation*}
+        Dg(x, y) = \begin{bmatrix}
+            \partial_x g & \partial_y g
+        \end{bmatrix} = \begin{bmatrix}
+            2x & 2y
+        \end{bmatrix}
+    \end{equation*}
+
+    Luego nos queda que
+    \begin{equation*}
+        \begin{bmatrix}
+            4x & 2y
+        \end{bmatrix} = \begin{bmatrix}
+            2\lambda x & 2\lambda y
+        \end{bmatrix}
+    \end{equation*}
+
+    Es decir tenemos el siguiente sistema de ecuaciones
+    \begin{align*}
+        4x &= 2\lambda x\\
+        2y &= 2 \lambda y\\
+        x^2 + y^2 &= 1
+    \end{align*}
+
+    De las 2 primeras ecuaciones obtenemos que
+    \begin{align*}
+        2x(2 - \lambda) &= 0\\
+        2y(1 - \lambda) &= 0
+    \end{align*}
+
+    \textbf{Caso} $\mathbf{x = 0}$: si $x = 0$ entonces tenemos de la tercera ecuación que $y = \pm 1$, por lo que los puntos críticos asociados a este caso son $P_2 = (0, 1)$, $P_3 = (0, -1)$.
+
+    \textbf{Caso} $\mathbf{\lambda = 2}$: Si $\lambda = 2$, entonces obtenemos de la segunda ecuacion que
+    \begin{equation*}
+        -2 y = 0 \implies y = 0
+    \end{equation*}
+
+    de la tercera ecuación obtenemos que $x = \pm 1$, luego los puntos asociados a este caso son
+    \begin{align*}
+        P_4 &= (1, 0)\\
+        P_5 &= (-1, 0)
+    \end{align*}
+
+    \textbf{Caso} $\mathbf{y = 0}$: Este caso es análogo a uno que ya hicimos, pues reemplazando en la tercera ecuación obtenemos que $x = \pm1$, por lo que no obtenemos puntos nuevos.
+
+    \textbf{Caso} $\mathbf{\lambda = 1}$: Reemplazando $\lambda$ en la primera, tenemos que $2x = 0$ y por tanto $x = 0$, luego reemplazando en la tercera obtenemos $y = \pm 1$ por lo que no tenemos nuevos puntos.
+
+    Por lo tanto todos los puntos criticos son 
+    \begin{align*}
+        P_1 &= (0, 0)\\
+        P_2 &= (0, 1)\\
+        P_3 &= (0, -1)\\
+        P_4 &= (1, 0)\\
+        P_5 &= (-1, 0)
+    \end{align*}
+
+    Evaluamos todos los puntos en la funcion $T$ para encontrar cual es el minimo y cual es el maximo.
+
+    \begin{align*}
+        T(0, 0) &= 0\\
+        T(0, 1) &= 1\\
+        T(0, -1) &= 1\\
+        T(1, 0) &= 2\\
+        T(-1, 0) &= 2
+    \end{align*}
+
+    Luego la maxima temperatura es $2$ y la minima es $0$.
+\end{sol}
+
+
+\end{document}
