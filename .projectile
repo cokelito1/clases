@@ -1,0 +1,5 @@
+-.auctex-auto/
+-*.aux
+-*.log
+-*.out
+-*.synctex.gz
