@@ -3,8 +3,8 @@
 
 \hypersetup{
 pdfauthor = {Jorge Bravo},
-pdfsubject = {MAT227 2024-1},
-pdftitle = {Tarea 1 MAT227},
+pdfsubject = {EDO},
+pdftitle = {Introduccion a las EDO},
 pdfkeywords = {},
 }
 
@@ -19,5 +19,131 @@ pdfkeywords = {},
 \end{center}
 
 \section*{Preliminares y definiciones basicas}
+Eventualmente escribire esto
+
+\section*{EDO separable}
+Una EDO separable es una ecuación diferencial ordinaria de grado $1$ que se puede escribir de la siguiente forma
+\begin{equation*}
+y' = f(x)g(y)
+\end{equation*}
+
+con $f, g$ funciones continuas. Notemos que la función $f$ \textbf{no} puede depender de $y$, análogamente $g$ no puede depender de $x$. Es decir nos queda algo que solo depende de $x$ multiplicado por algo que solo depende de $y$.
+
+\begin{ejemplo}
+  La ecuación diferencial dada por
+  \begin{equation*}
+    y' = 6y^{2}x
+  \end{equation*}
+  Es separable, pues la podemos escribir como
+
+  \begin{equation*}
+    y' = (6y^{2})(x)
+  \end{equation*}
+\end{ejemplo}
+
+\begin{ejemplo}
+La EDO dada por
+\begin{equation*}
+y' = \frac{xy^{3}}{\sqrt{1+x^{2}}}
+\end{equation*}
+
+Es separable pues la podemos escribir de la forma
+\begin{equation*}
+y' = (\frac{x}{\sqrt{1+x^{2}}})(y^{3})
+\end{equation*}
+\end{ejemplo}
+
+\begin{ejemplo}
+  La EDO dada por
+  \begin{equation*}
+    y' = e^{x - y}
+  \end{equation*}
+
+  Es separable pues la podemos escribir como
+  \begin{equation*}
+    y' = e^{x - y} = e^{x}e^{-y}
+  \end{equation*}
+\end{ejemplo}
+
+Para resolver una EDO separable haremos un truco, el cual se puede justificar de manera formal pero no va al caso ver porque. El truco es el siguiente.
+
+\begin{enumerate}
+  \item Escribir la ecuación diferencial en su forma separada, es decir dejarla de la forma
+        \begin{equation*}
+          y' = f(x)g(y)
+        \end{equation*}
+  \item Cambiar la notación $y'$ por $\frac{dy}{dx}$, es decir escribir la EDO de la siguiente forma
+        \begin{equation*}
+          \frac{dy}{dx} = f(x) g(y)
+        \end{equation*}
+
+  \item Dejar todo lo que tenga $y$ a un lado y todo lo que tenga $x$ al otro, para esto es necesario multiplicar por $dx$, lo hacemos de manera totalmente formal
+        \begin{equation*}
+          \frac{1}{g(y)} dy = f(x) dx
+        \end{equation*}
+
+  \item Integrar ambos lados con respecto a su diferencial
+        \begin{equation*}
+          \int \frac{1}{g(y)} dy = \int f(x) dx
+        \end{equation*}
+  \item Una vez se integro ambos lados, despejar $y$.
+
+  \begin{ejemplo}
+    Resolvamos la siguiente EDO
+    \begin{equation*}
+      y' = 6y^{2}x
+    \end{equation*}
+
+    Esta ya esta escrita en su forma separada, por lo que cambiamos la notación a la de Leibniz
+    \begin{equation*}
+      \frac{dy}{dx} = 6y^{2}x
+    \end{equation*}
+
+    Dejamos todo lo que tenga $y$ a un lado y todo lo que tenga $x$ al otro
+    \begin{equation*}
+      \frac{1}{6y^{2}} dy = x dx
+    \end{equation*}
+
+    Integramos con respecto a cada variable
+
+    \begin{equation*}
+    -\frac{1}{6y} = \int \frac{1}{6y^{2}}  dy = \int x dx = \frac{x^{2}}{2} + C
+    \end{equation*}
+
+    Luego obtenemos
+    \begin{equation*}
+     -\frac{1}{6y} = \frac{x^{2}}{2} + C, C \in \RR
+    \end{equation*}
+
+    Por ultimo despejamos $y$
+    \begin{equation*}
+      -\frac{1}{6y} = \frac{x^{2}}{2} + C \iff -\frac{1}{6} = (\frac{x^{2}}{2} + C)y \iff y = -\frac{1}{6(\frac{x^{2}}{2} + C)}
+    \end{equation*}
+
+    Reordenando al final obtenemos que
+    \begin{equation*}
+      y = -\frac{1}{6x^{2} + 12C}
+    \end{equation*}
+
+    Pero como $C$ es arbitraria, $12C$ también lo es y podemos dejarlo como $C$ nada mas.
+    Es decir la solución general es
+    \begin{equation*}
+      y = -\frac{2}{6x^{2} + C}
+    \end{equation*}
+  \end{ejemplo}
+
+\end{enumerate}
+\section*{Problemas}
+\begin{prob}
+  Resuelva la siguiente EDO
+  \begin{equation*}
+    y' = -k\sqrt{y}
+  \end{equation*}
+\end{prob}
+\begin{sol}
+  \begin{equation*}
+    y(x) = (C - kx)^{2}
+  \end{equation*}
+\end{sol}
 
 \end{document}
