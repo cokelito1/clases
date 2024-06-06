@@ -9,3 +9,10 @@ for dir in */; do
 	cp *.pdf "$BLOG_DIRECTORY/ayudantias/mat023/"
 	cd ..
 done
+
+cd "$BLOG_DIRECTORY"
+cabal new-run site build
+git add *
+git commit -m "Deployed PDFs"
+git push
+cd "$PWD"
