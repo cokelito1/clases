@@ -18,9 +18,6 @@ pdfkeywords = {},
 \textsc{Ayudante: Jorge Bravo}\\
 \end{center}
 
-\section*{Preliminares y definiciones basicas}
-Eventualmente escribire esto
-
 \section*{EDO separable}
 Una EDO separable es una ecuación diferencial ordinaria de grado $1$ que se puede escribir de la siguiente forma
 \begin{equation*}
@@ -122,13 +119,13 @@ Para resolver una EDO separable haremos un truco, el cual se puede justificar de
 
     Reordenando al final obtenemos que
     \begin{equation*}
-      y = -\frac{1}{6x^{2} + 12C}
+      y = -\frac{2}{6x^{2} + 12C} \implies -\frac{1}{3x^{2} + 6C}
     \end{equation*}
 
-    Pero como $C$ es arbitraria, $12C$ también lo es y podemos dejarlo como $C$ nada mas.
+    Pero como $C$ es arbitraria, $6C$ también lo es y podemos dejarlo como $C$ nada mas.
     Es decir la solución general es
     \begin{equation*}
-      y = -\frac{2}{6x^{2} + C}
+      y = -\frac{1}{3x^{2} + C}
     \end{equation*}
   \end{ejemplo}
 
@@ -137,14 +134,105 @@ Para resolver una EDO separable haremos un truco, el cual se puede justificar de
 \begin{prob}
   Resuelva la siguiente EDO
   \begin{equation*}
-    y' = -k\sqrt{y}
+    y' = 2xy + 3y - 4x - 6
   \end{equation*}
 \end{prob}
 \begin{sol}
-  La solucion general a la edo viene dada por
+  Intentaremos factorizar la expresi\'on a la derecha, pues queremos dejarla como una EDO separable.
   \begin{equation*}
-    y(x) = (C - kx)^{2}
+    y' = 2xy + 3y - 4x - 6 = (2x + 3)y - 4x - 6 = (2x + 3)y - 2(2x + 3) = (2x + 3)(y - 2)
+  \end{equation*}
+
+  Luego la forma separada de la EDO es
+  \begin{equation*}
+    y' = (2x + 3)(y - 2)
+  \end{equation*}
+
+  Esto pues $y'$ es igual a una multiplicacion de $2$ factores, donde uno depende solo de $x$ y el otro solo de $y$. Aplicamos el metodo para EDO's separables, entonces reescribimos la ecuaci\'on con la otra notaci\'on
+  \begin{equation*}
+   \frac{dy}{dx} = (2x + 3)(y - 2)
+  \end{equation*}
+
+  Ahora dejamos todo lo que tenga $y$ al lado izquierdo y todo lo que tenga $x$ al lado derecho, multiplicamos por $dx$ sin problemas.
+  \begin{equation*}
+    \frac{1}{y - 2} dy = (2x + 3) dx
+  \end{equation*}
+
+  Ahora integramos
+  \begin{align*}
+    \int \frac{1}{y - 2} dy &= \int (2x + 3) dx\\
+  \end{align*}
+
+  Resolvamos primero la integral de la derecha, entonces por linealidad tenemos que
+  \begin{equation*}
+    \int (2x + 3) dx = \int 2x dx + \int 3 dx = x^{2} + 3x + C
+  \end{equation*}
+
+  Ahora resolvamos la integral de la izquierda, los haremos usando el cambio de variable $u = y - 2$, luego tenemos que $du = dy$ entonces
+  \begin{equation*}
+    \int \frac{1}{y - 2} dy = \int \frac{1}{u} du = \ln (|u|) = \ln(|y - 2|)
+  \end{equation*}
+
+  Ahora tenemos que despejar $y$ desde la igualdad, notemos que
+  \begin{equation*}
+    \ln(|y - 2|) = x^{2} + 3x + C \iff |y - 2| = e^{x^{2} + 3x + C} \iff |y - 2| = e^{C}e^{x^{2} + 3x}
+  \end{equation*}
+
+  Como $C$ es arbitrario, tenemos que $e^{C}$ tambien es arbitrario, por lo que lo cambiamos por una constante
+  \begin{equation*}
+    |y - 2| = Ce^{x^{2} + 3x}
+  \end{equation*}
+
+  Ahora el signo del valor absoluto lo puede absorber la constante, por lo que tenemos que
+  \begin{equation*}
+    y - 2 = Ce^{x^{2} + 3x} \iff y = 2 + Ce^{x^{2} + 3x}
+  \end{equation*}
+
+  Por lo tanto la funci\'on general de la EDO viene dada por
+  \begin{equation*}
+    y(x) = 2 + Ce^{x^{2} + 3x}
   \end{equation*}
 \end{sol}
 
+\begin{prob}
+  Resuelva el siguiente problema de valor inicial
+  \begin{gather*}
+    \frac{dy}{dx} = \frac{x^{3}}{y^{2}}\\
+    y(0) = 3
+  \end{gather*}
+\end{prob}
+
+\begin{sol}
+  Primero resolvamos la EDO, notemos que ya esta escrita en la notacion de Leibniz y que ya esta en su forma
+  separada, dejamos todo lo que tenga $y$ a la izquierda y todo lo que tenga $x$ a la derecha.
+  \begin{equation*}
+    y^{2} dy = x^{3} dx
+  \end{equation*}
+
+  Ahora integramos
+  \begin{gather*}
+    \int y^{2} dy = \frac{y^{3}}{3}\\
+    \int x^{3} dx = \frac{x^{4}}{4} + C
+  \end{gather*}
+
+  Ahora despejamos $y$ desde la igualdad.
+  \begin{equation*}
+    \frac{y^{3}}{3} = \frac{x^{4} + 4C}{4} \iff y^{3} = \frac{3x^{4} + 12C}{4} \iff y = \sqrt[3]{\frac{3x^{4} + 12C}{4}}
+  \end{equation*}
+
+  De nuevo, dado que $C$ es arbitrario, $12C$ tambien lo es y por tanto podemos reemplazar $12C$ por $C$. Por lo tanto la solucion a la EDO es
+  \begin{equation*}
+    y = \sqrt[3]{\frac{3x^{4} + C}{4}}
+  \end{equation*}
+
+  Ahora usamos la condicion inicial para despejar la constante, por lo tanto
+  \begin{equation*}
+    3 = y(0) = \sqrt[3]{\frac{C}{4}} \iff 27 = \frac{C}{4} \iff C = 108
+  \end{equation*}
+
+  Por lo tanto la solucion al PVI viene dada por
+  \begin{equation*}
+    y(x) = \sqrt[3]{\frac{3x^{4} + 108}{4}}
+  \end{equation*}
+\end{sol}
 \end{document}
