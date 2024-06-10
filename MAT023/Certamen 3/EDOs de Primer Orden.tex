@@ -42,4 +42,101 @@ Para resolver este tipo de EDO's entonces lo unico que hay que hacer es reconoce
 
 \end{ejemplo}
 
+<<<<<<< HEAD
+\section*{Ecuaci\'on de Bernoulli}
+La EDO de Bernoulli es una ecuacion diferencial de primer orden con la siguiente estructura
+\begin{equation*}
+  y' + f(x) y = g(x)y^{\alpha}, \alpha \neq 1
+\end{equation*}
+
+Para resolver esta EDO seguiremos los siguientes pasos
+\begin{enumerate}
+  \item Reconocer que es una EDO de Bernoulli
+  \item Multiplicar por $y^{-\alpha}$ la ecuacion, para dejarla de la siguiente forma
+        \begin{equation*}
+          \label{cambio}
+          y^{-\alpha}y' + f(x)y^{1 - \alpha} = g(x)
+        \end{equation*}
+  \item Hacer el cambio de variable $z = y^{1 - \alpha}$, derivando obtenemos que
+        \begin{equation*}
+          z' = (1 - \alpha)y^{-\alpha}y' \implies \frac{z'}{(1 - \alpha)y^{-\alpha}} = y'
+        \end{equation*}
+  \item Reemplazamos en $(\ref{cambio})$ con la nueva variable
+        \begin{equation*}
+          \frac{1}{1 - \alpha} z' + f(x)z = g(x)
+        \end{equation*}
+  \item Dejamos $z'$ ``despejado''
+        \begin{equation*}
+          z' + (1 - \alpha) f(x) z = g(x)(1 - \alpha)
+        \end{equation*}
+  \item Resolver la EDO como una EDO lineal de primer orden
+  \item Deshacer el cambio de variable.
+\end{enumerate}
+
+\begin{ejemplo}
+  Resuelva la siguiente Ecuacion diferencial
+  \begin{equation*}
+    y' + \frac{4}{x}y = x^{3}y^{2}, x > 0
+  \end{equation*}
+\end{ejemplo}
+
+\begin{enumerate}
+  \item Lo primero que haremos sera reconocer que es una EDO de Bernoulli con $\alpha = 2$, $f(x) = \frac{4}{x}$ y $g(x) = x^{3}$.
+  \item Multiplicamos por $y^{-2}$
+        \begin{equation*}
+          y^{-2}y' + \frac{4}{x}y^{-1} = x^{3}
+        \end{equation*}
+  \item Hacemos el cambio de variable $z = y^{1 - 2} = y^{-1}$, luego tenemos que $z' = -y^{-2}y' \implies y' = -y^{2}z'$
+  \item Reemplazamos en la EDO
+        \begin{equation*}
+          -y^{-2}y^{2}z' + \frac{4}{x} z = x^{3} \iff -z' + \frac{4}{x} z = x^{3}
+        \end{equation*}
+
+  \item Despejamos $z'$, en este caso solo hay que multiplicar por $-1$
+        \begin{equation*}
+          z' - \frac{4}{x}z = -x^{3}
+        \end{equation*}
+
+  \item Ahora resolvemos la EDO lineal de primer orden que nos queda. Notemos que el factor integrante viene dado por
+        \begin{equation*}
+          \mu(x) = e^{\int -\frac{4}{x} dx}
+        \end{equation*}
+
+        Calculemos la integral
+        \begin{equation*}
+          \int - \frac{4}{x} dx = - 4 \int \frac{1}{x} dx = - 4 \ln(x) = \ln(x^{-4})
+        \end{equation*}
+
+        Luego el factor integrate es
+        \begin{equation*}
+          \mu(x) = e^{\ln(x^{-4})} = x^{-4}
+        \end{equation*}
+
+        Por la formula de Leibniz, tenemos que la solucion a la EDO viene dada por
+        \begin{equation*}
+          z(x) = \frac{1}{\mu(x)} (\int \mu(x) g(x) dx) = x^{4}(\int x^{-4}(-x^{3}))
+        \end{equation*}
+
+        Hacemos la integral
+        \begin{equation*}
+          \int x^{-4}(-x^{3}) dx = - \int x^{-1} dx = - \int \frac{1}{x} dx = - \ln (x) + C
+        \end{equation*}
+
+        Por lo que la solucion a la edo en terminos de $z$ viene dada por
+        \begin{equation*}
+          z(x) = x^{4}(C - \ln(x))
+        \end{equation*}
+
+  \item Deshacemos el cambio de variable
+        \begin{equation*}
+          y^{-1}(x) = z(x) = x^{4}(C - \ln(x)) \implies y(x) = \frac{1}{x^{4}(C - \ln(x))}
+        \end{equation*}
+
+
+
+
+\end{enumerate}
+
+=======
+>>>>>>> 49e710b (Se creo la EDO de primer orden)
 \end{document}
