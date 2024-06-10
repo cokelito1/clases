@@ -1,0 +1,45 @@
+\documentclass[a4paper,oneside,10.5pt]{article}
+\usepackage{../../TeXMacros/personal}
+
+\hypersetup{
+pdfauthor = {Jorge Bravo},
+pdfsubject = {EDO},
+pdftitle = {EDOs de Primer Orden},
+pdfkeywords = {},
+}
+
+\setlength\parindent{0px}
+\begin{document}
+
+
+\begin{center}
+{\Large \textsc{EDOs de Primer Orden}}\\
+\vspace{1em}
+\textsc{Ayudante: Jorge Bravo}\\
+\end{center}
+
+\section*{EDO Lineal de Primer Orden}
+Una ecuación diferencial de grado $1$ se dirá lineal si es de la siguiente forma para funciones $f,g \in \mathcal{C}$
+
+\begin{equation}
+  \label{edo lineal}
+  y' + f(x)y = g(x)
+\end{equation}
+
+Dada una EDO lineal de primer orden se define el factor integrador como
+\begin{equation*}
+  \mu(x) = e^{\int f(x) dx}
+\end{equation*}
+
+Luego la solución al problema $(\ref{edo lineal})$ viene dada por la formula de Leibniz, la cual es
+\begin{equation*}
+  y(x) = \frac{1}{\mu(x)} (\int \mu(x) g(x) dx)
+\end{equation*}
+
+Para resolver este tipo de EDO's entonces lo unico que hay que hacer es reconocer que es una EDO lineal de primer orden y despues aplicar la formula de Leibniz.
+
+\begin{ejemplo}
+
+\end{ejemplo}
+
+\end{document}
