@@ -39,15 +39,40 @@ Luego la solución al problema $(\ref{edo lineal})$ viene dada por la formula de
 Para resolver este tipo de EDO's entonces lo unico que hay que hacer es reconocer que es una EDO lineal de primer orden y despues aplicar la formula de Leibniz.
 
 \begin{ejemplo}
+  Resuelva la siguiente EDO
+  \begin{equation*}
+    ty' + 2y = t^{2} - t  + 1
+  \end{equation*}
+
+  Lo primero que haremos sera dejarla en la forma canonica, es decir con el $y'$ solo, luego dividimos por $t$ y obtenemos que
+  \begin{equation*}
+    y' + \frac{2}{t}y = t - 1 + \frac{1}{t}
+  \end{equation*}
+
+  Luego la edo ya esta en su forma lineal para aplicar Leibniz. Calculemos el factor integrador
+  \begin{equation*}
+    \mu(t) = e^{\int \frac{2}{t} dt} = e^{2 \ln(|t|)} = t^{2}
+  \end{equation*}
+
+  Entonces la solucion a la EDO viene dada por
+  \begin{equation*}
+    y(t) = \frac{1}{\mu(t)}(\int \mu(t)(t - 1 + \frac{1}{t}) dt) = t^{-2}(\int t^{3} - t^{2} + t dt) = t^{-2}(\frac{1}{4} t^{4} - \frac{1}{3}t^{3} + \frac{1}{2}t^{2} + C)
+  \end{equation*}
+
+  Por lo tanto la solucion general viene dada por
+  \begin{equation*}
+    y(t) = \frac{1}{4}t^{2} - \frac{1}{3}t + \frac{1}{2} + Ct^{-2}
+  \end{equation*}
+
 
 \end{ejemplo}
 
-<<<<<<< HEAD
 \section*{Ecuaci\'on de Bernoulli}
 La EDO de Bernoulli es una ecuacion diferencial de primer orden con la siguiente estructura
 \begin{equation*}
   y' + f(x) y = g(x)y^{\alpha}, \alpha \neq 1
 \end{equation*}
+Con $f, g \in \mathcal{C}$
 
 Para resolver esta EDO seguiremos los siguientes pasos
 \begin{enumerate}
@@ -132,11 +157,139 @@ Para resolver esta EDO seguiremos los siguientes pasos
           y^{-1}(x) = z(x) = x^{4}(C - \ln(x)) \implies y(x) = \frac{1}{x^{4}(C - \ln(x))}
         \end{equation*}
 
-
-
-
 \end{enumerate}
 
-=======
->>>>>>> 49e710b (Se creo la EDO de primer orden)
+\section*{EDO de Ricatti}
+La edo de Ricatti es una Ecuacion diferencial de primer orden \textbf{no} lineal que tiene la siguiente forma
+\begin{equation*}
+  y' + f(x) y + g(x) y^{2} = h(x)
+\end{equation*}
+con $f, g, h \in \mathcal{C}$
+
+Para resolver este tipo de EDO's, lo primero que necesitamos es conocer \textbf{una} solucion a la EDO, es decir necesitamos una funcion $u(x)$ tal que cuando la reemplazamos en la ecuacion esta se satisfaga. Una vez tenemos esto podemos encontrar el resto de las soluciones con los siguientes pasos
+
+\begin{enumerate}
+  \item Definimos el siguiente cambio de variable
+        \begin{equation*}
+          y = u + \frac{1}{v}
+        \end{equation*}
+
+        Donde $v$ es la nueva variable y $u$ es la solucion que conocemos
+  \item Derivamos para despejar $y'$
+        \begin{equation*}
+          y' = u'  - \frac{v'}{v^{2}}
+        \end{equation*}
+
+  \item Reemplazamos en la EDO
+        \begin{equation*}
+          (u' - \frac{v'}{v^{2}}) + f(x)(u + \frac{1}{v}) + g(x)(u + \frac{1}{v})^{2} = h(x)
+        \end{equation*}
+
+  \item Reordenamos la edo
+        \begin{align*}
+          u' - \frac{v'}{v^{2}} + f(x)u + \frac{f(x)}{v} + g(x)(u^{2} + \frac{2u}{v} + \frac{1}{v^{2}}) &= h(x)\\
+          \iff u' - \frac{v'}{v^{2}} + f(x)u + \frac{f(x)}{v} + g(x)u^{2} + g(x) \frac{2u}{v} + \frac{g(x)}{v^{2}} &= h(x)\\
+          \iff (u' + f(x)u + g(x)u^{2}) - \frac{v'}{v^{2}} + \frac{f(x)}{v} + g(x) \frac{2u}{v} + \frac{g(x)}{v^{2}} &= h(x)
+        \end{align*}
+
+        Ahora recordamos que $u$ satisface la edo y por tanto el parentesis de la izquierda es igual a $h(x)$
+
+        \begin{align*}
+          h(x) - \frac{v'}{v^{2}} + \frac{f(x)}{v} + g(x) \frac{2u}{v} + \frac{g(x)}{v^{2}} &= h(x)\\
+          \iff - \frac{v'}{v^{2}} + \frac{f(x)}{v} + g(x) \frac{2u}{v} + \frac{g(x)}{v^{2}} &= 0\\
+          \iff v' - f(x)v - 2u g(x)v- g(x) &= 0\\
+          \iff v' + (-f(x) - 2ug(x))v &= g(x)
+        \end{align*}
+  \item Resolvemos la EDO lineal que nos queda
+  \item Devolvemos el cambio de variable
+\end{enumerate}
+
+\begin{obs}
+ Hay profesores que dejan saltar desde $1.$ hasta el final de $4.$ directamente, por lo que no es necesario hacer todo el trabajo, solo aprenderse la forma de la EDO despues de hacer el cambio de variable.
+\end{obs}
+
+\begin{ejemplo}
+
+\end{ejemplo}
+
+\section*{Problemas}
+\begin{prob}
+  Resuelva la siguiente EDO
+  \begin{equation*}
+    y' + ty = 5t
+  \end{equation*}
+
+\end{prob}
+
+\begin{prob}[control]
+  Resolver la ecuacion con valor inicial (Bernoulli):
+  \begin{equation*}
+    y' = \frac{1}{x}y - \frac{2x}{y}
+  \end{equation*}
+
+  Con la ccondicion inicial
+  \begin{equation*}
+    y(1) = 1
+  \end{equation*}
+
+\end{prob}
+\begin{sol}
+  Ya que sabemos que es una ecuacion diferencial de Bernoulli, primero la pondremos en su forma ``canonica''
+  \begin{equation*}
+    y' - \frac{1}{x}y = -2x y^{-1}
+  \end{equation*}
+
+  Luego esta es una ecuacion de Bernoulli con $\alpha = -1$, por lo que multiplicaremos por $y$
+  \begin{equation*}
+    yy' - \frac{1}{x}y^{2} = -2x
+  \end{equation*}
+
+  Hacemos el cambio de variable $z = y^{2}$, luego $z' = 2yy' \iff y' = \frac{z'}{2y}$
+  \begin{equation*}
+    y \frac{z'}{2y} - \frac{1}{x} z = -2x \iff \frac{1}{2}z' - \frac{1}{x}z = -2x
+  \end{equation*}
+
+  Despejamos el $z'$, luego
+  \begin{equation*}
+    z' - \frac{2}{x}z = -4x
+  \end{equation*}
+
+  Esta es una EDO lineal de primer orden, la resolvemos con la formula de Leibniz, el factor integrante viene dado por
+  \begin{equation*}
+    \mu(x) = e^{\int -\frac{2}{x} dx}
+  \end{equation*}
+
+  Hacemos la integral, luego
+  \begin{equation*}
+    \int -\frac{2}{x} dx = -2 \int \frac{1}{x} dx = -2 \ln (x) = \ln(x^{-2})
+  \end{equation*}
+
+  Por lo tanto el factor integrante es
+  \begin{equation*}
+    \mu(x) = e^{\ln(x^{-2})} = x^{-2}
+  \end{equation*}
+
+  Luego por la formula de Leibniz, la solucion a la EDO viene dada por
+  \begin{equation*}
+    z(x) = \frac{1}{\mu(x)}(\int \mu(x)(-4x) dx) = -x^{2}\int x^{-1} dx = -4x^{2} (\ln(x) + C)
+  \end{equation*}
+
+  Ahora deshacemos el cambio de variable, recordamos que
+  \begin{equation*}
+    y^{2} = z = -x^{2} \ln(x) + C \iff y = \sqrt{-4x^{2} \ln(x) + Cx^{2}}
+  \end{equation*}
+
+  Ahora evaluamos en $1$ para encontrar la la constante
+  \begin{equation*}
+    1 = y(1) = \sqrt{C} \iff C = 1
+  \end{equation*}
+
+  Luego la solucion general al problema de valor inicial viene dado por
+  \begin{equation*}
+    y = \sqrt{-4x^{2}\ln(x) + x^{2}}
+  \end{equation*}
+
+
+\end{sol}
+
 \end{document}
