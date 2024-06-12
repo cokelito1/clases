@@ -1,0 +1,250 @@
+\documentclass[a4paper,oneside,10.5pt]{article}
+\usepackage{../../TeXMacros/personal}
+
+\hypersetup{
+pdfauthor = {Jorge Bravo},
+pdfsubject = {EDO},
+pdftitle = {Introduccion a las EDO},
+pdfkeywords = {},
+}
+
+\setlength\parindent{0px}
+\begin{document}
+
+
+\begin{center}
+{\Large \textsc{EDO Exacta}}\\
+\vspace{1em}
+\textsc{Ayudante: Jorge Bravo}\\
+\end{center}
+
+\section*{Estructura y Forma de una Ecuacion diferencial exacta}
+La estructura de una EDO exacta es la siguiente, tiene 2 formas
+\begin{gather}
+M(x, y) dx + N(x, y) dy = 0 \label{edo1}\\
+M(x, y) + N(x, y) \frac{dy}{dx} = 0 \label{edo2}
+\end{gather}
+
+La ecuacion diferencial se dira exacta si se cumple que
+\begin{equation*}
+  N_{x}(x, y) - M_{y}(x, y) = 0
+\end{equation*}
+
+Por cosas de matematicas muy avanzandas (fuera del curso) si la EDO es exacta, entonces se cumple que existe una funcion $\Phi : \RR^{2} \to \RR$ de tal forma que
+\begin{equation*}
+  \Phi_{x} = M(x, y) \land \Phi_{y} = N(x, y)
+\end{equation*}
+
+de tal forma que las curvas de nivel de $\Phi$ seran soluciones a la ecuacion diferencial.
+
+
+\begin{obs}
+  Es importante que esten igualadas a $0$ y el signo entre ellas sea $+$, en caso de no ser $+$ se considera el simbolo dentro de $M$ u $N$ dependiendo del caso.
+\end{obs}
+
+\subsection*{Como solucionar un EDO exacta}
+Lo haremos con un ejemplo pues es la forma m\'as sencilla de explicar
+\begin{ejemplo}
+  Considere la Siguiente EDO y resuelvala
+  \begin{equation*}
+    (2xy - 9x^{2}) dx + (2y + x^{2} + 1) dy = 0
+  \end{equation*}
+
+  \begin{enumerate}
+    \item El primer paso sera verificar que la EDO es exacta. Notemos que ya tiene la estructura de una EDO exacta, falta verificar que es exacta. Notemos que
+          \begin{gather*}
+            M(x, y) = 2xy - 9x^{2}\\
+            N(x, y) = 2y + x^{2} + 1
+          \end{gather*}
+
+          Para verificar que es exacta tenemos que vericar que
+          \begin{equation*}
+            N_{x}(x, y) - M_{y}(x, y) = 0
+          \end{equation*}
+
+          Entonces calculemos
+          \begin{gather*}
+            N_{x}(x, y) = 2x\\
+            M_{y}(x, y) = 2x
+          \end{gather*}
+
+          Luego $N_{x}(x, y) - M_{y}(x, y) = 0$. Por lo tanto la EDO es exacta.
+    \item Ahora tenemos que encontrar la $\Phi$, sabemos que $\Phi_{x} = M(x, y)$, por lo tanto si integramos con respecto a $x$ obtenemos $\Phi$.
+          \begin{equation*}
+            \Phi(x, y) = \int M(x, y) dx = \int 2xy - 9x^{2} dx = x^{2}y - 3x^{3} + C(y)
+          \end{equation*}
+
+          Dado que $\Phi_{y}(x, y) = N(x, y)$ igualamos
+          \begin{equation*}
+            x^{2} + C'(y) = \Phi_{y}(x, y) = N(x, y) = 2y + x^{2} + 1
+          \end{equation*}
+
+          De lo que se desprende que
+          \begin{equation*}
+            x^{2} + C'(y) = 2y + x^{2} + 1 \iff C'(y) = 2y + 1
+          \end{equation*}
+
+          Integramos con respecto a $y$ para obtener $C(y)$
+          \begin{equation*}
+            C(y) = \int 2y + 1 dy = y^{2} + y + C
+          \end{equation*}
+
+          Por lo tanto la funcion $\Phi$ que buscabamos es
+          \begin{equation*}
+            \Phi(x, y) = x^{2}y - 3x^{3} + y^{2} + y + C
+          \end{equation*}
+
+    \item Luego la solucion implicita a la EDO viene dada por
+          \begin{equation*}
+            x^{2}y - 3x^{3} + y^{2} + y + C = \Phi(x, y) = 0
+          \end{equation*}
+
+          Es decir
+          \begin{equation*}
+            x^{2}y - 3x^{3} + y^{2} + y = C
+          \end{equation*}
+  \end{enumerate}
+\end{ejemplo}
+
+Ahora el paso a paso
+\begin{enumerate}
+  \item Lo primero que hacemos es dejar la EDO en su forma canonica, es decir al dejamos de la forma
+        \begin{equation*}
+          M(x, y) dx + N(x, y) dy = 0
+        \end{equation*}
+  \item Verificamos que la EDO es exacta, es decir vemos que se cumple
+        \begin{equation*}
+          N_{x}(x, y) - M_{y}(x, y) = 0
+        \end{equation*}
+  \item Vemos que es mas facil integrar, si $M(x, y)$ con respecto a $x$ \'o $N(x, y)$ con respecto a $y$.
+        Seleccionamos uno de estos, en este caso usaremos $M(x, y)$ como ejemplo
+
+  \item Planteamos la existencia de una funcion $\Phi(x, y)$ de tal forma que
+        \begin{align}
+          \Phi(x, y)_{x} &= M(x, y) \label{edo3}\\
+          \Phi(x, y)_{y} &= N(x, y) \label{edo4}
+        \end{align}
+
+        Al integrar con respecto a lo que escogimos obtenemos
+        \begin{equation}
+          \Phi(x, y) = \int M(x, y) dx + C(y) \label{wea}
+        \end{equation}
+
+        Llamemos $S(x, y) = \int M(x, y) dx$
+  \item Derivamos el $\Phi$ que tenemos con respecto a la otra variable, en nuestro caso $y$, e igualamos con las ecuaciones $(\ref{edo3})$ u $(\ref{edo4})$, es decir nos que
+        \begin{equation*}
+          S_{y}(x, y) + C'(y) = \Phi_{y}(x, y) = N(x, y)
+        \end{equation*}
+
+  \item Despejamos $C'(y)$
+        \begin{equation*}
+          C'(y) = N(x, y) - S_{y}(x, y)
+        \end{equation*}
+
+  \item Integramos con respecto a la variable de la cual depende $C$, en nuestro aso $y$. De donde obtenemos
+        \begin{equation*}
+          C(y) = \int N(x, y) - S_{y}(x, y) dy
+        \end{equation*}
+
+  \item Reemplazamos en $(\ref{wea})$ y obtenemos
+        \begin{equation*}
+          \Phi(x, y) = S(x, y) + \int N(x, y) - S_{y}(x, y) dy
+        \end{equation*}
+
+  \item La soluci\'on a la EDO viene dada por
+        \begin{equation*}
+          \Phi(x, y) = C
+        \end{equation*}
+
+
+\end{enumerate}
+
+\section*{EDOs Exactas con factor integrante}
+Puede darse el caso donde tengamos una ecuacion diferencial de la forma $(\ref{edo1})$ \'o $(\ref{edo2})$ pero que esta no sea exacta, es decir que
+\begin{equation*}
+  N_{x} - M_{y} \neq 0
+\end{equation*}
+
+Hay veces en las que si se multiplica la EDO por un factor integrante $\eta(x, y)$ esta se vuelva exacta, al multiplicar por esta funcion la siguiente EDO es exacta
+\begin{equation*}
+  \eta(x, y) M(x, y) dx + \eta(x, y) N(x, y) dy = 0
+\end{equation*}
+
+Encontrar este $\eta$ normalmente es muy complicado, por lo que nos dan una forma que tiene que tener y con la condicion
+\begin{equation*}
+\partial_{x} (\eta(x, y)N(x, y)) - \partial_{y}(\eta(x, y) M(x, y)) = 0
+\end{equation*}
+
+\begin{ejemplo}
+  La ecuaci\'on
+  \begin{equation*}
+    (x - \frac{y^{2}}{x}) d x+ 2y dy = 0
+  \end{equation*}
+  tiene un factor integrante (que la convierte en exacta) de la forma $f(x^{2} + y^{2})$. Hallarlo
+  \begin{enumerate}
+    \item Multiplicamos por el factor integrante y escribimos la ecuacion de exactitud.
+          \begin{equation*}
+            (f(x^{2} + y^{2})x - f(x^{2} + y^{2})\frac{y^{2}}{x}) dx + f(x^{2} + y^{2}) 2y dy = 0
+          \end{equation*}
+
+          Ahora tenemos que
+          \begin{gather*}
+            M(x, y) = (f(x^{2} + y^{2})x - f(x^{2} + y^{2})\frac{y^{2}}{x})\\
+            N(x, y) = f(x^{2} + y^{2}) 2y
+          \end{gather*}
+
+          Por exactitud tenemos que
+          \begin{equation*}
+            N_{x} - M_{y} = 0
+          \end{equation*}
+
+          Calculamos las derivadas
+          \begin{equation*}
+            M_{y}(x, y) =  2xyf'(x^{2} + y^{2}) - (2\frac{y^{3}}{x} f'(x^{2} + y^{2}) + f(x^{2} + y^{2}) \frac{2y}{x})
+          \end{equation*}
+
+          Ademas
+          \begin{equation*}
+            N_{x} = 4xyf'(x^{2} + y^{2})
+          \end{equation*}
+
+          Ocupamos la ecuacion de exactitud
+          \begin{align*}
+            2xyf'(x^{2} + y^{2}) + 2y(\frac{y^{2}f'(x^{2} + y^{2}) + f(x^{2} + y^{2})}{x}) &= 0\\
+            2x^{2}yf'(x^{2} + y^{2}) + 2y(y^{2}f'(x^{2} + y^{2}) + f(x^{2} + y^{2})) &= 0\\
+            x^{2}f'(x^{2} + y^{2}) + (y^{2}f'(x^{2} + y^{2}) + f(x^{2} + y^{2})) &= 0\\
+            (x^{2} + y^{2})f'(x^{2} + y^{2}) &= -f(x^{2} + y^{2})\\
+            \frac{f'(x^{2} + y^{2})}{f(x^{2} + y^{2})} &= -\frac{1}{x^{2} + y^{2}}
+          \end{align*}
+
+          Hacemos el cambio de variable $u = x^{2} + y^{2}$, luego
+          \begin{equation*}
+            \frac{f'(u)}{f(u)} = -\frac{1}{u} \iff (\ln(f(u)))' = - \frac{1}{u}
+          \end{equation*}
+
+          Integramos con respecto a $u$, luego
+          \begin{equation*}
+            \ln(f(u)) = - \ln(u) \iff \ln(f(x^{2} + y^{2})) = - \ln(x^{2} + y^{2})
+          \end{equation*}
+
+          Aplicamos la exponencial
+          \begin{equation*}
+            f(x^{2} + y^{2}) = \frac{1}{x^{2} + y^{2}}
+          \end{equation*}
+
+
+  \end{enumerate}
+\end{ejemplo}
+
+\section*{Problemas}
+\begin{prob}
+  Considere la ecuacion
+  \begin{equation*}
+    2xy dx + (x^{2} + \cos(y)) dy =
+  \end{equation*}
+
+  Verifique que es exacta, encuentre la solucion general y encuentre la solucion que pasa por el punto $(1, \pi)$
+
+\end{prob}
+
+\end{document}
