@@ -218,8 +218,29 @@ Para resolver este tipo de EDO's, lo primero que necesitamos es conocer \textbf{
   \begin{equation*}
     y' + ty = 5t
   \end{equation*}
-
 \end{prob}
+\begin{sol}
+  Esta es una EDO lineal que ya esta en su forma canonica. Esta tiene $f(t) = t$ y $g(t) = 5t$, luego su factor integrante viene dado por
+  \begin{equation*}
+    \mu(t) = e^{\int f(t) dt} = e^{\int t dt} = e^{\frac{t^{2}}{2}}
+  \end{equation*}
+
+  Luego la solucion general viene dada por
+  \begin{equation*}
+    y(t) = \frac{1}{\mu(t)}(\int \mu(t) g(t) dt) = e^{-\frac{t^{2}}{2}} (\int e^{\frac{t^{2}}{2}} 5t dt)
+  \end{equation*}
+
+  Calculemos la integral, hacemos el cambio de variable $u = \frac{t^{2}}{2}$, luego $du = t dt$.
+  Entonces la integral nos queda
+  \begin{equation*}
+    \int e^{\frac{t^{2}}{2}} 5t dt = 5 \int e^{u} du = 5e^{u} + C= 5e^{\frac{t^{2}}{2}} + C
+  \end{equation*}
+
+  Por lo tanto la solucion es
+  \begin{equation*}
+    y(t) = e^{-\frac{t^{2}}{2}}(5e^{\frac{t^{2}}{2}} + C) = 5 + Ce^{-\frac{t^{2}}{2}}
+  \end{equation*}
+\end{sol}
 
 \begin{prob}[control]
   Resolver la ecuacion con valor inicial (Bernoulli):
@@ -227,7 +248,7 @@ Para resolver este tipo de EDO's, lo primero que necesitamos es conocer \textbf{
     y' = \frac{1}{x}y - \frac{2x}{y}
   \end{equation*}
 
-  Con la ccondicion inicial
+  Con la condicion inicial
   \begin{equation*}
     y(1) = 1
   \end{equation*}
